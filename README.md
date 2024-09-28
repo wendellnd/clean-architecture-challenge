@@ -11,7 +11,7 @@
 - Mude o diretório de trabalho para `cmd/ordersystem`
 - Inicie os servidores `http`, `gRPC` e `graphQL` com o comando `go run main.go wire_gen.go`.
 
-## 2. Adicionando itens na tabela
+## 3. Adicionando itens na tabela
 
 - Adicione itens na tabela orders utilizando o arquivo [api/create_order.http](api/create_order.http)
 
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 ```
 
-## 3. HTTP - Listagem de orders
+## 4. HTTP - Listagem de orders
 
 - Utilize o arquivo [api/list_orders.http](api/list_orders.http) para listar as ordens com o servidor http, a resposta deve ser uma lista, com todos os itens adicionados.
 
@@ -72,7 +72,7 @@ Connection: close
 }
 ```
 
-## 4. gRPC - Listagem de orders
+## 5. gRPC - Listagem de orders
 
 Em outro terminal, utilize o evans para listar as orders no gRPC, com os comandos a seguir:
 
@@ -103,7 +103,7 @@ A resposta do comando `call ListOrders` deve ser uma lista, como no exemplo a se
 }
 ```
 
-## 5. GraphQL - Listagem de orders
+## 6. GraphQL - Listagem de orders
 
 - No seu navegador de preferência, acesse a URL http://localhost:8080 para abrir o playgroud do GraphQL.
 
