@@ -8,4 +8,5 @@ import "github.com/wendellnd/graduate-go-expert-classes/Clean_Architecture/inter
 
 type Resolver struct {
 	CreateOrderUseCase usecase.CreateOrderUseCase
+	ListOrdersUseCase  usecase.ListOrdersUseCase
 }

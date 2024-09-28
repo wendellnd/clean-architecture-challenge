@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"github.com/wendellnd/graduate-go-expert-classes/Clean_Architecture/internal/entity"
+	"github.com/wendellnd/graduate-go-expert-classes/Clean_Architecture/internal/infra/event"
 	"github.com/wendellnd/graduate-go-expert-classes/Clean_Architecture/pkg/events"
 )
 
@@ -20,18 +21,15 @@ type OrderOutputDTO struct {
 
 type CreateOrderUseCase struct {
 	OrderRepository entity.OrderRepositoryInterface
-	OrderCreated    events.EventInterface
 	EventDispatcher events.EventDispatcherInterface
 }
 
 func NewCreateOrderUseCase(
 	OrderRepository entity.OrderRepositoryInterface,
-	OrderCreated events.EventInterface,
 	EventDispatcher events.EventDispatcherInterface,
 ) *CreateOrderUseCase {
 	return &CreateOrderUseCase{
 		OrderRepository: OrderRepository,
-		OrderCreated:    OrderCreated,
 		EventDispatcher: EventDispatcher,
 	}
 }
@@ -54,8 +52,9 @@ func (c *CreateOrderUseCase) Execute(input OrderInputDTO) (OrderOutputDTO, error
 		FinalPrice: order.Price + order.Tax,
 	}
 
-	c.OrderCreated.SetPayload(dto)
-	c.EventDispatcher.Dispatch(c.OrderCreated)
+	orderCreatedEvent := event.NewOrderCreated()
+	orderCreatedEvent.SetPayload(dto)
+	c.EventDispatcher.Dispatch(orderCreatedEvent)
 
 	return dto, nil
 }

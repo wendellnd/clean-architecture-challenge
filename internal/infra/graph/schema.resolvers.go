@@ -11,6 +11,23 @@ import (
 	"github.com/wendellnd/graduate-go-expert-classes/Clean_Architecture/internal/usecase"
 )
 
+func (r *queryResolver) Orders(ctx context.Context) ([]*model.Order, error) {
+	output, err := r.ListOrdersUseCase.Execute()
+	if err != nil {
+		return nil, err
+	}
+	orders := make([]*model.Order, 0)
+	for _, order := range output.Orders {
+		orders = append(orders, &model.Order{
+			ID:         order.ID,
+			Price:      float64(order.Price),
+			Tax:        float64(order.Tax),
+			FinalPrice: float64(order.FinalPrice),
+		})
+	}
+	return orders, nil
+}
+
 // CreateOrder is the resolver for the createOrder field.
 func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderInput) (*model.Order, error) {
 	dto := usecase.OrderInputDTO{
@@ -33,4 +50,8 @@ func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderIn
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
+// Query returns QueryResolver implementation.
+func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+
 type mutationResolver struct{ *Resolver }
+type queryResolver struct{ *Resolver }
