@@ -4,7 +4,6 @@
 
 - Execute o comando `docker compose up --detach` para iniciar os servidores `mysql` e `rabbitmq`.
 - Verifique o status do servidor com o comando `docker ps`
-- Quando o servidor for instanciado, execute o comando `make migrate` para criar a tabela orders.
 
 ## 2. Iniciando os servidores http, gRPC e GraphQL
 
