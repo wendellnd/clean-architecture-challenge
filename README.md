@@ -5,11 +5,6 @@
 - Execute o comando `docker compose up --detach` para iniciar os servidores `mysql` e `rabbitmq`.
 - Verifique o status do servidor com o comando `docker ps`
 
-## 2. Iniciando os servidores http, gRPC e GraphQL
-
-- Mude o diretório de trabalho para `cmd/ordersystem`
-- Inicie os servidores `http`, `gRPC` e `graphQL` com o comando `go run main.go wire_gen.go`.
-
 ## 3. Adicionando itens na tabela
 
 - Adicione itens na tabela orders utilizando o arquivo [api/create_order.http](api/create_order.http)
